@@ -4,13 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,9 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.Reporter;
 
 /**
@@ -35,7 +29,6 @@ public class Utils {
 	
 	private static   int screenshotCount =0;
 	private static  String fileExt = null;
-	private static Select dropdown = null;
 
 	/*
 	 * wait for element load
@@ -113,41 +106,6 @@ public class Utils {
 		}
 		return true;
 	}
-	
-    public static void accept_alert(){
-  
-    	Alert alert = DriverUtils.getDriver().switchTo().alert();
-    	alert.accept();
-    }
-    
-    public static boolean verify_data_saved(By locator, String value){
-    	try{
-    	WebElement element = DriverUtils.getDriver().findElement(locator);
-    	if(element.getAttribute("value").equals(value.toString())){
-    		System.out.println("VERIFY_DATA_SAVED :: PASSED");
-    		return true;
-    	}
-		return false;
-    	}
-    	catch(Exception e){
-    		System.out.println(e);
-    	}
-		return false;
-    }
-    public static boolean verify_data_present(By locator, String value){
-    	try{
-    	WebElement element = DriverUtils.getDriver().findElement(locator);
-    	if(element.getText().equals(value.toString())){
-    		System.out.println("VERIFY_DATA_SAVED :: PASSED");
-    		return true;
-    	}
-		return false;
-    	}
-    	catch(Exception e){
-    		System.out.println(e);
-    	}
-		return false;
-    }
     
     
     public static BigDecimal round(float d, int decimalPlace) {
@@ -156,129 +114,7 @@ public class Utils {
         return bd.stripTrailingZeros();
     }
 	
-	/*
-	 * Checking the dropdown filter is working properly
-	 * @dropdownLocator   which dropdown want to use
-	 * @selectedOption    which option should select
-	 * @tableLocator   table locator 
-	 * @verifyColumnIndex  which column of the table shold verify
-	 * 
-	 * 
-	 * @retrun  number of rows verified
-	 */
-	public static int verifyFilteredData( By dropdownLocator, String selectedOption, By tableLocator, int verifyColumnIndex ){
-		new Select(DriverUtils.getDriver().findElement(dropdownLocator)).selectByVisibleText(selectedOption);
-		logger.debug("selectedOption :"+selectedOption);
-		try {
-			Thread.sleep(Constants.AJAX_MAX_WAIT_TIME);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-        Utils.captureScreenshot();
-		WebElement table = DriverUtils.getDriver().findElement(tableLocator); 
-		//  get all the tbody elements from the table 
-		List<WebElement> tableBody = table.findElements(By.tagName("tbody"));
-		// get all the tr elements from the table 
-		List<WebElement> allRows = tableBody.get(0).findElements(By.tagName("tr")); 
-		logger.debug("Number of rows : "+allRows.size());
-		
-		// iterate over them, getting the cells 
-		if(! selectedOption.equals("All")){
-			for (int i = 0; i < allRows.size(); i++) {
-				List<WebElement> cells = allRows.get(i).findElements(By.tagName("td")); 
-				for (int j = 0; j < cells.size(); j++) {
-					if(j == verifyColumnIndex){
-						Assert.assertEquals(cells.get(j).getText(), selectedOption);
-						//System.out.println(cells.get(j).getText());
-						logger.debug("verified Option :"+cells.get(j).getText());
-					}
-				}
-			}
-		}
 
-		return allRows.size();
-	}
-	
-	public static int getTableRowCount( By tableLocator){
-		Utils.ajaxWait(Constants.AJAX_MAX_WAIT_TIME);
-		WebElement table = DriverUtils.getDriver().findElement(tableLocator); 
-		//  get all the tbody elements from the table 
-		List<WebElement> tableBody = table.findElements(By.tagName("tbody"));
-		// get all the tr elements from the table 
-		List<WebElement> allRows = tableBody.get(0).findElements(By.tagName("tr")); 
-		logger.debug("Number of rows : "+allRows.size());
-		return allRows.size();
-	}
-	
-	public static void Select_dropdown (By Locator){
-		try{
-		WebElement element = DriverUtils.getDriver().findElement(Locator);
-		dropdown=new Select(element);
-		dropdown.selectByIndex(1);
-		}
-		catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		
-	}
-	
-	public static void Select_dropdown_ID (By Locator, int index){
-		try{
-		WebElement element = DriverUtils.getDriver().findElement(Locator);
-		dropdown=new Select(element);
-		dropdown.selectByIndex(index);
-		}
-		catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		
-	}
-	
-	public static void Select_dropdown_value (By Locator, String value){
-		try{
-		WebElement element = DriverUtils.getDriver().findElement(Locator);
-		dropdown=new Select(element);
-		dropdown.selectByValue(value);
-		}
-		catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		
-		
-	}
-	
-	
-	public static boolean hasNextPage( By countLabelLocator, By pageRightNavigation){
-		try{
-		logger.debug("hasNextPage");
-		System.out.println(countLabelLocator.toString());
-		System.out.println(pageRightNavigation.toString());
-		System.out.println();
-		WebElement element = DriverUtils.getDriver().findElement(countLabelLocator); 
-		System.out.println(element.getText());
-		String labelString = element.getText();
-		labelString = labelString.replaceAll("\\s+","");
-		System.out.println(labelString);
-        String labelArray[] = labelString.split("of");
-        System.out.println(labelArray[0]);
-    	System.out.println(labelArray[1]);
-        if(labelArray[0].trim().equals(labelArray[1])){
-        	System.out.println(labelArray[0]);
-        	System.out.println(labelArray[1]);
-        	return false;
-        }else{
-        	ajaxWait(Constants.AJAX_MIN_WAIT_TIME);	
-          DriverUtils.driver.findElement(pageRightNavigation).click();	
-          //ajaxWait(Constants.AJAX_MIN_WAIT_TIME);	
-        }
-		return true;
-		}
-		catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		return false;
-	}
-	
 	public static void ajaxWait(int waitTime){
 		try {
 			Thread.sleep(waitTime);
@@ -287,6 +123,9 @@ public class Utils {
 		}
 	}
 	
+	/*
+	 * Capture the screenshot after every success test case results
+	 */
 	
 	public static String captureScreenshot() {
 		WebDriver augmentedDriver = null;
@@ -355,126 +194,6 @@ public class Utils {
 	    Reporter.log("<a href=\\selenium\\workspace\\CATVET_Automation_Ver_1.0.0\\" + filePath + "><img src=\\Selenium\\workspace\\CaterPillar\\CATVET_Automation_Ver_1.0.0\\" + filePath + " style=width:100px;height:100px;/>" + filePath + "</a><br/>");
 	    return "Failed_"+fileName+".jpg";
 	}	
-	
-	public static void verifyAlphabeticalFilter( By alphabeticalContainerLocator , By tableLocator ){
-		logger.debug("verifyAlphabeticalFilter Started");
-		WebElement alphabeticalContainer = DriverUtils.getDriver().findElement(alphabeticalContainerLocator); 
-		List<WebElement> navContainer = alphabeticalContainer.findElements(By.tagName("nav"));
-		List<WebElement> ulContainer = navContainer.get(0).findElements(By.tagName("ul")); 
-		List<WebElement> liList = ulContainer.get(0).findElements(By.tagName("li")); 
-		List<WebElement> hRef = liList.get(26).findElements(By.tagName("a"));
-		hRef.get(0).click();
-		logger.debug("Click on :"+hRef.get(0).getText());	
-		int totalRowCount = getTableRowCount(tableLocator);
-		logger.debug("totalRowCount " +totalRowCount);
-		int filteredRowCount = 0 ;
-		
-		for (int i = 0; i < liList.size()-1; i++) {
-			hRef = liList.get(i).findElements(By.tagName("a"));
-			hRef.get(0).click();
-			logger.debug("Click on :"+hRef.get(0).getText());
-			Utils.ajaxWait(Constants.AJAX_MIN_WAIT_TIME);
-			List<WebElement> filteredRows= getFilteredTableRow(tableLocator);
-			filteredRowCount = filteredRowCount + filteredRows.size();
-			logger.debug("filtered Row Sum Count :" +filteredRowCount);
-			for(int j =0; j< filteredRows.size(); j++){
-				logger.debug("loop :" +j);
-				List<WebElement> cells = filteredRows.get(j).findElements(By.tagName("td"));
-				String cellValue = cells.get(0).getText();
-				logger.debug("cellValue :" +cellValue);
-				Assert.assertEquals(String.valueOf(cellValue.charAt(0)), hRef.get(0).getText());    
-			}
-		}
-		Assert.assertEquals(filteredRowCount,totalRowCount);   
-		logger.debug("verifyAlphabeticalFilter finished");
-	}
-	
-	private static List<WebElement> getFilteredTableRow(By tableLocator){
-		logger.debug("getTableRowCells started");
-		WebElement table = DriverUtils.getDriver().findElement(tableLocator); 
-		//  get all the tbody elements from the table 
-		List<WebElement> tableBody = table.findElements(By.tagName("tbody"));
-		// get all the tr elements from the table 
-		List<WebElement> allRows = tableBody.get(0).findElements(By.tagName("tr")); 
-		List<WebElement> filteredRows = new ArrayList<WebElement>();
-		for(WebElement element : allRows){
-			if("dataRow".equals(element.getAttribute("class"))){
-				filteredRows.add(element);
-			}
-		}
-		logger.debug("filteredRows count :"+filteredRows.size());
-	    logger.debug("getTableRowCells finished");
-		return filteredRows;
-	}
-	
-	public static List<WebElement> getTableRow(By tableLocator){
-		logger.debug("getTableRowCells started");
-		WebElement table = DriverUtils.getDriver().findElement(tableLocator); 
-		//  get all the tbody elements from the table 
-		List<WebElement> tableBody = table.findElements(By.tagName("tbody"));
-		// get all the tr elements from the table 
-		List<WebElement> allRows = tableBody.get(0).findElements(By.tagName("tr")); 
-	    logger.debug("getTableRowCells finished");
-		return allRows;
-	}
-	
-	
-	public static void doAutoComplteOperation(By autoComplteSuggestionLocator){
-		logger.debug("doAutoComplteOperation started");
-		WebElement autoComplteContainer = DriverUtils.getDriver().findElement(autoComplteSuggestionLocator); 
-		List<WebElement> liList = autoComplteContainer.findElements(By.tagName("li"));
-		if(liList.size() >= 1){
-			int randumNum = randInt(0, liList.size());
-			logger.debug("randum item selected index :"+randumNum);
-			liList.get(randumNum).click();
-			logger.debug("item selected from auto complet list");
-		}
-		logger.debug("doAutoComplteOperation finished");
-	}
-	
-	public static int randInt(int min, int max) {
-
-	    // NOTE: Usually this should be a field rather than a method
-	    // variable so that it is not re-seeded every call.
-	    Random rand = new Random();
-
-	    // nextInt is normally exclusive of the top value,
-	    // so add 1 to make it inclusive
-	    int randomNum = rand.nextInt((max - min) + 1) + min;
-
-	    return randomNum;
-	}
-	
-	
-	
-/*	public void verifySearchFiler(String searchQuary, By dropdownLocator, String selectedOption ){
-		logger.debug("verifySearchFiler started");
-		logger.debug("Entering search value ");
-		driver.findElement(getSearchField()).clear();
-		driver.findElement(getSearchField()).sendKeys(searchQuary);
-        logger.debug("Click on search button");
-    	driver.findElement(getSearchIconButton()).click();
-    	Utils.ajaxWait(Constants.AJAX_MAX_WAIT_TIME);
-    	List<WebElement> allRows = Utils.getTableRow(getResultTable());
-    	Assert.assertEquals(allRows.size(), 1);
-	    List<WebElement> cells = allRows.get(0).findElements(By.tagName("td"));
-	    Assert.assertEquals(cells.get(3).getText(), searchQuary);
-	    logger.debug("verifySearchFiler finished");
-	}*/
-	
-	
-	public boolean checkOptions(String[] expected){
-	  /*  WebElement select = driver.findElement(By.id("ctl00_cphMainContent_dq14_response"));
-	    List<WebElement> options = select.findElement(By.xpath(".//option"));
-	    int k = 0;
-	    for (WebElement opt : options){
-	        if (!opt.getText().equals(expected[k]){
-	            return false;
-	        }
-	        k = k + 1;
-	    }*/
-	    return true;
-	}
 	
 	private static String getFolderExt(){
 		if (fileExt == null){

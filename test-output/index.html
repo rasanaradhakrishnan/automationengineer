@@ -23,7 +23,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">2 suites</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -48,7 +48,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-automation_engineer">
-                    <span>D:\selenium\workspace\AutomationEngineer\testng.xml</span>
+                    <span>D:\selenium\workspace\AutomationEngineer\testng_role_user.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -103,16 +103,18 @@
       <div class="main-panel-root">
         <div panel-name="suite-automation_engineer" class="panel automation_engineer">
         </div> <!-- panel automation_engineer -->
+        <div panel-name="suite-Automation_All_Suites" class="panel Automation_All_Suites">
+        </div> <!-- panel Automation_All_Suites -->
         <div panel-name="test-xml-automation_engineer" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">D:\selenium\workspace\AutomationEngineer\testng.xml</span>
+            <span class="header-content">D:\selenium\workspace\AutomationEngineer\testng_role_user.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;automation_engineer&quot;&gt;
-  &lt;test name=&quot;Test&quot;&gt;
+  &lt;test name=&quot;user&quot;&gt;
     &lt;groups&gt;
       &lt;define name=&quot;all&quot;&gt;
         &lt;include name=&quot;failure&quot;/&gt;
@@ -123,11 +125,27 @@
       &lt;/run&gt;
     &lt;/groups&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.automation.enigineer.screens.AppEbayLogin&quot;/&gt;
-      &lt;class name=&quot;com.automation.enigineer.screens.AppEbaySwipe&quot;/&gt;
+      &lt;class name=&quot;com.automation.enigineer.test.AppEbayLogin&quot;/&gt;
+      &lt;class name=&quot;com.automation.enigineer.test.AppEbaySwipe&quot;/&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- Test --&gt;
+  &lt;/test&gt; &lt;!-- user --&gt;
 &lt;/suite&gt; &lt;!-- automation_engineer --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="test-xml-Automation_All_Suites" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">D:\selenium\workspace\AutomationEngineer\testng.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Automation All Suites&quot;&gt;
+  &lt;suite-files&gt;
+    &lt;suite-file path=&quot;testng_role_user.xml&quot;/&gt;
+  &lt;/suite-files&gt;
+&lt;/suite&gt; &lt;!-- Automation All Suites --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
@@ -138,14 +156,30 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Test (2 classes)</span>
+                <span class="test-name">user (2 classes)</span>
               </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Automation_All_Suites" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Automation All Suites</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="group-automation_engineer" class="panel">
           <div class="main-panel-header rounded-window-top">
             <span class="header-content">Groups for automation_engineer</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Automation_All_Suites" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Automation All Suites</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -174,9 +208,40 @@ return data;
             </div> <!-- times-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
+        <div panel-name="times-Automation_All_Suites" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Automation All Suites</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Automation_All_Suites');
+function tableData_Automation_All_Suites() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(0);
+window.suiteTableData['Automation_All_Suites']= { tableData: data, tableDiv: 'times-div-Automation_All_Suites'}
+return data;
+}
+              </script>
+              <div id="times-div-Automation_All_Suites">
+              </div> <!-- times-div-Automation_All_Suites -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
         <div panel-name="reporter-automation_engineer" class="panel">
           <div class="main-panel-header rounded-window-top">
             <span class="header-content">Reporter output for automation_engineer</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Automation_All_Suites" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Automation All Suites</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -187,22 +252,11 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
-              <span class="ignored-class-name">com.automation.enigineer.screens.AppEbayLogin</span>
+              <span class="ignored-class-name">com.automation.enigineer.test.AppEbaySwipe</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">login</span>
-                <br/>
-                <span class="ignored-method-name">loginToApp</span>
-                <br/>
-              </div> <!-- ignored-methods-div -->
-            </div> <!-- ignored-class-div -->
-            <div class="ignored-class-div">
-              <span class="ignored-class-name">com.automation.enigineer.screens.AppEbaySwipe</span>
-              <div class="ignored-methods-div">
-                <span class="ignored-method-name">SearchTV</span>
+                <span class="ignored-method-name">selectTV</span>
                 <br/>
                 <span class="ignored-method-name">checkoutScreen</span>
-                <br/>
-                <span class="ignored-method-name">selectTV</span>
                 <br/>
                 <span class="ignored-method-name">reviewItem</span>
                 <br/>
@@ -210,11 +264,36 @@ return data;
                 <br/>
                 <span class="ignored-method-name">loginToApp</span>
                 <br/>
+                <span class="ignored-method-name">SearchTV</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">com.automation.enigineer.test.AppEbayLogin</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">loginToApp</span>
+                <br/>
+                <span class="ignored-method-name">login</span>
+                <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
+        <div panel-name="ignored-methods-Automation_All_Suites" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
         <div panel-name="chronological-automation_engineer" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Automation_All_Suites" class="panel">
           <div class="main-panel-header rounded-window-top">
             <span class="header-content">Methods in chronological order</span>
           </div> <!-- main-panel-header rounded-window-top -->

@@ -1,15 +1,18 @@
-package com.automation.enigineer.screens;
+package com.automation.enigineer.test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -83,8 +86,7 @@ public class AppEbaySwipe {
 		driver.pressKeyCode(AndroidKeyCode.ENTER);
 
 		// check if the shoes results are displayed
-		// WebElement sort_btn=;
-		// we.until(ExpectedConditions.presenceOfElementLocated(By.id("com.ebay.mobile:id/textview_header_title")));
+		Utils.captureScreenshot();
 
 	}
 
@@ -137,7 +139,7 @@ public class AppEbaySwipe {
 		assertTrue(Utils.isElementPresent(By.id("com.ebay.mobile:id/button_bin")));
 		Utils.clickOnAnElement(By.id("com.ebay.mobile:id/button_bin"));
 		Thread.sleep(5000);
-
+		Utils.captureScreenshot();
 	}
 
 	/*
@@ -161,6 +163,7 @@ public class AppEbaySwipe {
 		// System.out.println(driver.getPageSource());
 		driver.findElement(By.id("com.ebay.mobile:id/button_google_deny")).click();
 
+		Utils.captureScreenshot();
 		Thread.sleep(500);
 	}
 
@@ -181,6 +184,8 @@ public class AppEbaySwipe {
 		driver.pressKeyCode(AndroidKeyCode.ENTER);
 		Utils.isElementPresent(By.id("com.ebay.mobile:id/take_action"));
 		Utils.clickOnAnElement(By.id("com.ebay.mobile:id/take_action"));
+		
+		Utils.captureScreenshot();
 		Thread.sleep(5000);
 
 	}
@@ -212,9 +217,19 @@ public class AppEbaySwipe {
 		logger.debug(itemPrice);
 		logger.debug(productDetailsPrice);
 		assertEquals(productDetailsPrice.compareTo(itemPrice),0);
-
+		
+		Utils.captureScreenshot();
 		Thread.sleep(5000);
 
+	}
+	
+	@AfterMethod( groups ={"user", "failure"})
+	public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
+	    if (testResult.getStatus() == ITestResult.FAILURE) {
+	    	logger.debug("takeScreenShotOnFailure start");
+	        Utils.captureScreenshotForFailedTest();
+		    logger.debug("takeScreenShotOnFailure finished");
+	   }  
 	}
 
 }

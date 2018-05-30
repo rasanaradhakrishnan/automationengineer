@@ -1,4 +1,4 @@
-package com.automation.enigineer.screens;
+package com.automation.enigineer.test;
 
 import java.util.concurrent.TimeUnit;
 

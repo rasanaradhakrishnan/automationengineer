@@ -1,4 +1,4 @@
-package com.automation.enigineer.screens;
+package com.automation.enigineer.test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -1,21 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="automation_engineer">
-  <test name="Test">
-  <groups>
-			<define name="all">
-				<include name="failure" />
-				<include name="user" />
-			</define>
-			<run>
-				<include name="all" />
-			</run>
-		</groups>
-    <classes>
-    <class name="com.automation.enigineer.screens.AppEbayLogin"/> 
-       <class name="com.automation.enigineer.screens.AppEbaySwipe"/> 
-      <!-- <class name="com.automation.enigineer.screens.AppEbayUIScrollable"/> -->
-       
-    </classes>
-  </test> <!-- Test -->
-</suite> <!-- automation_engineer -->
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation All Suites">
+  <suite-files>
+ 	 <suite-file path="testng_role_user.xml" />
+  </suite-files>
+</suite>

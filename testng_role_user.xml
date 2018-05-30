@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="automation_engineer">
+  <test name="user">
+  <groups>
+			<define name="all">
+				<include name="failure" />
+				<include name="user" />
+			</define>
+			<run>
+				<include name="all" />
+			</run>
+		</groups>
+    <classes>
+    <class name="com.automation.enigineer.test.AppEbayLogin"/> 
+       <class name="com.automation.enigineer.test.AppEbaySwipe"/>        
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- automation_engineer -->
