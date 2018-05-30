@@ -30,9 +30,6 @@ public class AppEbaySwipe {
 	WebDriverWait we;
 	String productDetailsPrice;
 
-	private By signin = By.id("com.ebay.mobile:id/button_sign_in");
-	private By register = By.id("com.ebay.mobile:id/button_register");
-
 	private By userIdField = By.id("com.ebay.mobile:id/edit_text_username");
 	private By passwordField = By.id("com.ebay.mobile:id/edit_text_password");
 	private By loginSubmitButton = By.id("com.ebay.mobile:id/button_sign_in");

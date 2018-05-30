@@ -1,7 +1,5 @@
 package com.automation.engineer.utils;
 
-import static org.junit.Assert.fail;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.math.BigDecimal;
