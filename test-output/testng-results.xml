@@ -2,13 +2,13 @@
 <testng-results skipped="0" failed="0" total="0" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="automation_engineer" duration-ms="9" started-at="2018-05-30T06:35:40Z" finished-at="2018-05-30T06:35:40Z">
+  <suite name="automation_engineer" duration-ms="0" started-at="2018-05-30T09:59:17Z" finished-at="2018-05-30T09:59:17Z">
     <groups>
     </groups>
-    <test name="user" duration-ms="9" started-at="2018-05-30T06:35:40Z" finished-at="2018-05-30T06:35:40Z">
+    <test name="user" duration-ms="0" started-at="2018-05-30T09:59:17Z" finished-at="2018-05-30T09:59:17Z">
     </test> <!-- user -->
   </suite> <!-- automation_engineer -->
-  <suite name="Automation All Suites" duration-ms="0" started-at="2018-05-30T06:35:40Z" finished-at="2018-05-30T06:35:40Z">
+  <suite name="Automation All Suites" duration-ms="0" started-at="2018-05-30T09:59:17Z" finished-at="2018-05-30T09:59:17Z">
     <groups>
     </groups>
   </suite> <!-- Automation All Suites -->

@@ -17,6 +17,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.automation.engineer.page.AppEbayPage;
 import com.automation.engineer.utils.Constants;
 import com.automation.engineer.utils.DriverUtils;
 import com.automation.engineer.utils.LogFacade;
@@ -32,17 +33,15 @@ public class AppEbaySwipe {
 	AndroidDriver driver = null;
 	WebDriverWait we;
 	String productDetailsPrice;
+	private AppEbayPage appEbayPage ;
 
-	private By userIdField = By.id("com.ebay.mobile:id/edit_text_username");
-	private By passwordField = By.id("com.ebay.mobile:id/edit_text_password");
-	private By loginSubmitButton = By.id("com.ebay.mobile:id/button_sign_in");
-
+	
 	@BeforeClass(groups = { "user", "failure" })
 	public void setUp() {
 		logger.debug("AppEbaySwipe setUp started ");
 		driver = DriverUtils.getDriver();
-		logger.debug("AppEbaySwipe setUp finished ");
 		we = new WebDriverWait(driver, 20);
+		logger.debug("AppEbaySwipe setUp finished ");
 	}
 
 	@BeforeMethod(groups = { "user", "failure" })
@@ -55,7 +54,7 @@ public class AppEbaySwipe {
 		} catch (Exception e) {
 			logger.debug(e.toString());
 		}
-
+		appEbayPage  = new AppEbayPage(driver);
 		logger.debug("setUpBeforeMethod finished");
 	}
 
@@ -68,23 +67,9 @@ public class AppEbaySwipe {
 	}
 
 	@Test(priority = 1)
-	public void SearchTV() throws InterruptedException {
-
-		// click on the element and send value
-		// WebElement
-		// search=driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\"com.ebay.mobile:id/search_box\")");
-		WebElement search = driver.findElement(By.id("com.ebay.mobile:id/search_box"));
-		search.click();
-
-		Thread.sleep(500);
-
-		// enter value in search field
-		WebElement search_enterValue = driver.findElement(By.id("com.ebay.mobile:id/search_src_text"));
-		search_enterValue.sendKeys("65-inch TV");
-
-		// press enter
-		driver.pressKeyCode(AndroidKeyCode.ENTER);
-
+	public void searchTV_TC() throws InterruptedException {
+		logger.info("Search TV started", "Searching for TV.......");
+		appEbayPage.searchTV();
 		// check if the shoes results are displayed
 		Utils.captureScreenshot();
 
@@ -96,7 +81,7 @@ public class AppEbaySwipe {
 	 * @throws InterruptedException
 	 */
 	@Test(priority = 2)
-	public void selectTV() throws InterruptedException {
+	public void selectTV_TC() throws InterruptedException {
 
 		// check if the shoes results are displayed
 		// WebElement
@@ -133,7 +118,7 @@ public class AppEbaySwipe {
 	 */
 
 	@Test(priority = 3)
-	public void addTOCart() throws InterruptedException {
+	public void addTOCart_TC() throws InterruptedException {
 
 		productDetailsPrice = Utils.getElementText(By.id("com.ebay.mobile:id/textview_item_price"));
 		assertTrue(Utils.isElementPresent(By.id("com.ebay.mobile:id/button_bin")));
@@ -147,22 +132,9 @@ public class AppEbaySwipe {
 	 */
 
 	@Test(priority = 4)
-	public void loginToApp() throws InterruptedException {
-
-		logger.debug("Entering user name");
-		driver.findElement(userIdField).clear();
-		driver.findElement(userIdField).sendKeys(Constants.USER_NAME);
-		logger.debug("Entering password");
-		driver.findElement(passwordField).clear();
-		// Updated password
-		driver.findElement(passwordField).sendKeys(Constants.PASSWORD);
-		logger.debug("Click on Login button");
-		driver.findElement(loginSubmitButton).click();
-
-		Utils.ajaxWait(Constants.AJAX_MIN_WAIT_TIME);
-		// System.out.println(driver.getPageSource());
-		driver.findElement(By.id("com.ebay.mobile:id/button_google_deny")).click();
-
+	public void loginToApp_TC() throws InterruptedException {
+		logger.debug("testEbayLogin started ");
+		appEbayPage.login();
 		Utils.captureScreenshot();
 		Thread.sleep(500);
 	}
@@ -174,12 +146,12 @@ public class AppEbaySwipe {
 	 */
 
 	@Test(priority = 5)
-	public void reviewItem() throws InterruptedException {
+	public void reviewItem_TC() throws InterruptedException {
 
 		assertTrue(Utils.isElementPresent(By.id("android:id/numberpicker_input")));
 		Utils.clickOnAnElement(By.id("android:id/numberpicker_input"));
 		Utils.clear(By.id("android:id/numberpicker_input"));
-		driver.findElement(By.id("android:id/numberpicker_input")).sendKeys("1");
+		Utils.enterValue(By.id("android:id/numberpicker_input"),"1");
 
 		driver.pressKeyCode(AndroidKeyCode.ENTER);
 		Utils.isElementPresent(By.id("com.ebay.mobile:id/take_action"));
@@ -198,7 +170,7 @@ public class AppEbaySwipe {
 	 */
 
 	@Test(priority = 6)
-	public void checkoutScreen() throws InterruptedException {
+	public void checkoutScreen_TC() throws InterruptedException {
 		// Scroll to the bottom of the screen
 		driver.scrollTo("Proceed to Pay");
 		// Get the area of checkout screen

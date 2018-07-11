@@ -57,7 +57,7 @@ public class AppEbayUIScrollable {
 	}
 
 	@Test(priority = 1)
-	public void Search_shoes() throws InterruptedException {
+	public void search_shoes_TC() throws InterruptedException {
 
 		// click on the element and send value
 		// WebElement
@@ -81,7 +81,7 @@ public class AppEbayUIScrollable {
 	}
 
 	@Test(priority = 2)
-	public void select_Lancer() throws InterruptedException {
+	public void select_Lancer_TC() throws InterruptedException {
 
 		WebElement Lancer_shoe = driver.findElementByAndroidUIAutomator(
 				"UiScrollable(UiSelector().resourceId(\"com.ebay.mobile:id/fragmentContainer\")).scrollIntoView(UiSelector().textContains(\"Lancer\"))");

@@ -20,11 +20,15 @@ public class Constants {
 	
 	public static String USER_NAME = "rasana_r@infosys.com";
 	public static String PASSWORD = "appiumtest1!";
+	public static String SEARCH_TV = "65-inch TV";
 	public static String ENVIRONMENT = "Mobile"; //Web,Mobile
 	public static String OPERATING_SYSTEM = "Android"; //iOS
 	
 	public static int MAX_SLEEP_TIME = 15000;
 	public static boolean IS_SCREENSHOT_REQUIRE = true;    
 	public static String DEVICE_ID = "015d41d423441812"; // Nexus 7 4.4.2  015d41d423441812
+	
+	public static final String Path_TestData = "testdata//";
+	public static final String File_TestData = "TestData.xlsx";
         
 }

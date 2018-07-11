@@ -62,7 +62,7 @@ public class AppEbayLogin {
 
 
 	@Test(priority = 1)
-	public void login() throws InterruptedException {
+	public void login_TC() throws InterruptedException {
 
 		// click on the element and send value
 		// WebElement
@@ -78,7 +78,7 @@ public class AppEbayLogin {
 	 */
 	
 	@Test(priority = 2)
-	public void loginToApp() throws InterruptedException {
+	public void loginToApp_TC() throws InterruptedException {
 		
 		logger.debug("Entering user name");
 		driver.findElement(userIdField).clear();
